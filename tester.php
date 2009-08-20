@@ -8,3 +8,5 @@ require_once 'Diggin/Search/Extractor/Engine.php';
 $extractor = new Diggin\Search\Extractor\Engine();
 
 var_dump($extractor);
+
+var_dump($extractor->run('aa'));

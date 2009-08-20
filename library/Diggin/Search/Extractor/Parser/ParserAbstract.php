@@ -1,6 +1,6 @@
 <?php
 namespace Diggin\Search\Extractor\Parser;
-
+use Diggin\Search\Extractor\Document as Document;
 // port package HTML::Feature::Base;
 
 abstract class ParserAbstract
@@ -24,6 +24,6 @@ abstract class ParserAbstract
     public function init($options){}
 
     // パースできないものはfalseを
-    // パーサが値を見つけられなかったときはnullを返す
-    abstract public function parse($html_ref, $url, $result);
+    // パーサが値を見つけられなかったときはnullを返す?
+    abstract public function parse(Document $documeet, $result);
 }
