@@ -9,11 +9,17 @@ use Diggin\Search\Extractor\Result;
 
 class ExtractContent extends ParserAbstract
 {
+    private $_extract;
+
+    public function init($options = array())
+    {
+        $this->_extract = new \HTML_ExtractContent();
+        $this->_extract->setOpt($options);
+    }
+
     public function parse(Document $document, Result $result)
     {
-        $extract = new \HTML_ExtractContent();
-        $extract->setOpt(array('debug' => true));
-        $ret = $extract->analyze($document->getBody());
+        $ret = $this->_extract->analyze($document->getBody());
         
         $result['desc'] = $ret[0];
         $result['title'] = $ret[1];
