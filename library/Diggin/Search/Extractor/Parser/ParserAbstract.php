@@ -1,6 +1,10 @@
 <?php
 namespace Diggin\Search\Extractor\Parser;
-use Diggin\Search\Extractor\Document as Document;
+require_once 'Diggin/Search/Extractor/Document.php';
+require_once 'Diggin/Search/Extractor/Result.php';
+use Diggin\Search\Extractor\Document;
+use Diggin\Search\Extractor\Result;
+
 // port package HTML::Feature::Base;
 
 abstract class ParserAbstract
@@ -25,5 +29,5 @@ abstract class ParserAbstract
 
     // パースできないものはfalseを
     // パーサが値を見つけられなかったときはnullを返す?
-    abstract public function parse(Document $documeet, $result);
+    abstract public function parse(Document $documeet, Result $result);
 }

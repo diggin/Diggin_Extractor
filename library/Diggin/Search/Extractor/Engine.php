@@ -9,7 +9,8 @@ class Engine
 {
     protected $_configs = array();
     protected $_parserLoader = null;
-    protected $_parsers = array('TagStructure' => array());
+    protected $_parsers = array('ExtractContent' => array(), 
+                                'TagStructure' => array());
 
     public function __construct($configs = array(), $parsers = null)
     {
@@ -30,7 +31,7 @@ class Engine
         }
 
         //test
-        $document = new Document('aaaaaaa');
+        $document = new Document(file_get_contents($resource));
 
         return $this->_parse($document);
     }

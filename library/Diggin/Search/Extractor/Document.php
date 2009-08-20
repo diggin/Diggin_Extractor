@@ -10,4 +10,9 @@ class Document
     {
         $this->_doc = $doc;
     }
+
+    public function getBody()
+    {
+        return $this->_doc;
+    }
 }
