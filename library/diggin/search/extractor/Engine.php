@@ -21,7 +21,7 @@ class Engine
                                     array('diggin\search\extractor\parser' => 'diggin/search/extractor/parser'));
     }
 
-    public function run($resource, $baseurl = null)
+    public function run($resource, $baseUri = null)
     {
         if ($resource instanceof Zend_Uri_Http) {
         } else if ($resource instanceof Zend_Http_Response) {
@@ -37,8 +37,8 @@ class Engine
     {
         $result = new Result();
         foreach ($this->_parsers as $parser => $options) {
-            $className = $this->_parserLoader->load($parser);
-            $parser = new $className($this->_configs, $options);
+            $parserName = $this->_parserLoader->load($parser);
+            $parser = new $parserName($this->_configs, $options);
 
             $result = $parser->parse($document, $result);
             if ($result['matched_engine']) {
