@@ -1,8 +1,8 @@
 <?php
-namespace Diggin\Search\Extractor\Parser;
+namespace diggin\search\extractor\Parser;
 
-use Diggin\Search\Extractor\Document;
-use Diggin\Search\Extractor\Result;
+use diggin\search\extractor\Document;
+use diggin\search\extractor\Result;
 
 class TagStructure extends ParserAbstract
 {
