@@ -1,11 +1,23 @@
 <?php
 
 $zf2libraryPath = '/path/to/zf2/library';
-$digginlibraryPath = '/path/to/library/Diggin';
-$charsetlibraryPath = '/path/to//Diggin_Http_Response_Charset/library/';
+$extractorlibraryPath = dirname(__DIR__).'/library/Diggin';
 
+// pear install openpear/Diggin_Http_Response_Charset
+// or
+// git clone git://github.com/sasezaki/Diggin_Http_Response_Charset.git
+$charsetlibraryPath = '/path/to/Diggin_Http_Response_Charset/library/';
+
+// pear install openpear/HTML_ExtractContent
+// or
+// svn export http://svn.openpear.org/HTML_ExtractContent/trunk/src/
 $htmlextractcontent = '/path/to/HTML_ExtractContent/src/';
 
+// git clone git://github.com/sasezaki/diggin.git
+$diggin08 = '/home/kazusuke/dev/workspace_Diggin/diggin/library/';
+
+// svn export http://svn.openpear.org/Diggin_Scraper_Adapter_Htmlscraping/branches/ver08
+$diggin08htmlscraping = '/path/to/Diggin_Scraper_Adapter_Htmlscraping/branches/ver08/library/';
 
 error_reporting( E_ALL | E_STRICT );
 set_include_path($zf2libraryPath . PATH_SEPARATOR 
@@ -13,9 +25,32 @@ set_include_path($zf2libraryPath . PATH_SEPARATOR
 
 require_once 'PHPUnit/Autoload.php';
 require_once $charsetlibraryPath.'Diggin/Http/Response/Charset/Front/UrlRegex.php';
+
+// todo call by classMapAutoloader
+require_once $diggin08.'Diggin/Service/Wedata/Wedata.php';
+require_once $diggin08.'Diggin/Siteinfo/Iterator.php';
+
+// require 0.8's scraper (not stable)
+require_once $diggin08.'Diggin/Uri/Http.php';
+require_once $diggin08.'Diggin/Scraper/Helper/HelperAbstract.php';
+require_once $diggin08.'Diggin/Scraper/Helper/Simplexml/SimplexmlAbstract.php';
+require_once $diggin08.'Diggin/Scraper/Helper/Simplexml/HeadBaseHref.php';
+require_once $diggin08.'Diggin/Scraper/Evaluator/AbstractEvaluator.php';
+require_once $diggin08.'Diggin/Scraper/Evaluator/Simplexml.php';
+require_once $diggin08.'Diggin/Scraper/Adapter/Wrapper/SimpleXMLElement.php';
+require_once $diggin08.'Diggin/Scraper/Adapter/AdapterInterface.php';
+require_once $diggin08.'Diggin/Scraper/Adapter/SimplexmlAbstract.php';
+require_once $diggin08htmlscraping.'Diggin/Scraper/Adapter/Htmlscraping.php';
+require_once $diggin08.'Diggin/Scraper/Context.php';
+require_once $diggin08.'Diggin/Scraper/Process/Process.php';
+require_once $diggin08.'Diggin/Scraper/Process/Aggregate.php';
+require_once $diggin08.'Diggin/Scraper/Strategy/AbstractStrategy.php';
+require_once $diggin08.'Diggin/Scraper/Strategy/Flexible.php';
+require_once $diggin08.'Diggin/Scraper/Scraper.php';
+
 require_once $htmlextractcontent.'HTML/ExtractContent.php';
 
 require_once 'Zend/Loader/StandardAutoloader.php';
 $autoloader = new Zend\Loader\StandardAutoloader;
-$autoloader->registerNamespace('Diggin', $digginlibraryPath);
+$autoloader->registerNamespace('Diggin', $extractorlibraryPath);
 $autoloader->register();
