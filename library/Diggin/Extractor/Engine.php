@@ -6,26 +6,17 @@ use Zend\Uri\Http as UriHttp,
 
 class Engine
 {
-    protected $_configs = array();
     protected $_parserSpecBroker = null;
     
     /**
      * parsers & paraer-option set.
-     *
      */
     protected $_parserOptions = array('extractcontent' => array(), 
-                                        'callback' => array());
+                                      'callback' => array());
 
-    public function __construct($configs = array())
+    public function __construct($parserOptions = array())
     {
-        $this->setConfig($configs);
-    }
-
-    public function setConfig($configs)
-    {
-        foreach($configs as $k => $v) {
-            $this->_configs[$k] = $v;
-        }
+        $this->setParserOptions($parserOptions);
     }
 
     // todo mutable check

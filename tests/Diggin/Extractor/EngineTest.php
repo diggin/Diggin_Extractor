@@ -16,7 +16,9 @@ class EngineTest extends \PHPUnit_Framework_TestCase
 
         $extractor = Extractor::factory();
         //$engine = new Engine;
-        $ret = $extractor->extract(new Url('http://musicrider.com/'));
+        //$ret = $extractor->extract(new Url('http://musicrider.com/'));
+        //$ret = $extractor->extract('http://musicrider.com/');
+        $ret = $extractor->extract('http://ugnews.net/');
         var_dump($ret);
     }
 }

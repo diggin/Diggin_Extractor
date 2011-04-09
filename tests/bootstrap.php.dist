@@ -2,13 +2,17 @@
 
 $zf2libraryPath = '/path/to/zf2/library';
 $digginlibraryPath = '/path/to/library/Diggin';
+$charsetlibraryPath = '/path/to//Diggin_Http_Response_Charset/library/';
+
 $htmlextractcontent = '/path/to/HTML_ExtractContent/src/';
+
 
 error_reporting( E_ALL | E_STRICT );
 set_include_path($zf2libraryPath . PATH_SEPARATOR 
                  . get_include_path());
 
 require_once 'PHPUnit/Autoload.php';
+require_once $charsetlibraryPath.'Diggin/Http/Response/Charset/Front/UrlRegex.php';
 require_once $htmlextractcontent.'HTML/ExtractContent.php';
 
 require_once 'Zend/Loader/StandardAutoloader.php';
