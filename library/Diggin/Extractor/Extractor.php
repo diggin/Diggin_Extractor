@@ -11,23 +11,32 @@ use Diggin\Extractor\Engine,
 class Extractor
 {
     protected static $_registry;
+
     protected $_httpClient;
     protected $_charsetFront;
 
-    public static function factory(array $parserOptions = array(), Registry $registry = null)
+    public static function factory(array $parserOptions = array())
     {
-        self::$_registry = $registry;
-        return new self($parserOptions);
+        return new static($parserOptions);
+    }
+
+    public static function setRegistry(Registry $registry)
+    {
+        static::$_registry = $registry;
     }
 
     public static function hasRegistry()
     {
-        return (boolean) self::$_registry;
+        return (boolean) static::$_registry;
     }
 
-    public static function getRegistry()
+    public static function getRegistry($create = true)
     {
-        return self::$_registry;
+        if ($create && !static::hasRegistry()) {
+            static::setRegistry(new Registry);
+        }
+
+        return static::$_registry;
     }
 
     private function __construct($parserOptions)
@@ -48,7 +57,6 @@ class Extractor
 
         return $this->_httpClient;
     }
-
     
     public function setResponseFilter()
     {
@@ -93,7 +101,7 @@ class Extractor
 
         $url = null;
         if ($resource instanceof Url) {
-            $url = $resource;
+            $metadatas['url'] = $url = $resource;
             $client = $this->getHttpClient();
             $client->setUri($resource);
             $resource = $client->request('GET');

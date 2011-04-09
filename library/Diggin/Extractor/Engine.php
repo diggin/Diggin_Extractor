@@ -11,7 +11,8 @@ class Engine
     /**
      * parsers & paraer-option set.
      */
-    protected $_parserOptions = array('extractcontent' => array(), 
+    protected $_parserOptions = array('ldrfullfeed' => array(),
+                                      'extractcontent' => array(), 
                                       'callback' => array());
 
     public function __construct($parserOptions = array())

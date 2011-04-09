@@ -3,12 +3,10 @@ namespace Diggin\Extractor;
 
 class Document
 {
-    // sandbox-property
     private $_body;
     private $_metadatas = array();
 
     /**
-     *
      * @param string $body
      */
     public function __construct($body, $metadatas = array())
@@ -24,6 +22,7 @@ class Document
 
     public function getMetadatas()
     {
-        $this->_metadatas;
+        return $this->_metadatas;
     }
+
 }
