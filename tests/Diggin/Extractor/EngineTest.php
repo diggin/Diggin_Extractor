@@ -8,7 +8,12 @@ use Diggin\Extractor\Extractor,
 
 class EngineTest extends \PHPUnit_Framework_TestCase
 {
-    public function testA()
+    public function setUp()
+    {
+        $this->markTestSkipped();
+    }
+
+    public function testBogus()
     {
         Callback::$callback = function ($document) {
             return array('description' => $document->getBody(), 'title' => 'x');
@@ -19,6 +24,6 @@ class EngineTest extends \PHPUnit_Framework_TestCase
         //$ret = $extractor->extract(new Url('http://musicrider.com/'));
         //$ret = $extractor->extract('http://musicrider.com/');
         $ret = $extractor->extract('http://ugnews.net/');
-        var_dump($ret);
+        //var_dump($ret);
     }
 }
