@@ -15,14 +15,18 @@ class Extractor
     protected $_httpClient;
     protected $_charsetFront;
 
+    /**
+     * $parserOptions = array(
+     *     'parser_name' => array('foo' => 'bar'); // associative array
+     * );
+     */
     public static function factory(array $parserOptions = array())
     {
         $static = new static();
         $parserSpecBroker = $static->getEngine()->getParserSpecBroker();
 
-        // cause bug
-        foreach ($parserOptions as $name => $spec) {
-            $parserSpecBroker->registerSpec($name, array(static::getRegistry(), $spec));
+        foreach ($parserOptions as $name => $settings) {
+            $parserSpecBroker->registerSpec($name, $settings);
         }
 
         return $static;
@@ -116,6 +120,8 @@ class Extractor
             $body = $this->filterResponse($resource, $url);
         }
 
-        return $this->getEngine()->run($body, $metadatas);
+        $engine = $this->getEngine();
+        $engine->setRegistry(static::getRegistry());
+        return $engine->run($body, $metadatas);
     }
 }

@@ -3,7 +3,7 @@ namespace Diggin\Extractor\Parser;
 
 use Diggin\Extractor\Parser\AbstractParser,
     Diggin\Extractor\Document,
-    Diggin\Extractor\Result
+    Diggin\Extractor\Result,
     HTML_ExtractContent;
 
 class ExtractContent extends AbstractParser
@@ -12,9 +12,9 @@ class ExtractContent extends AbstractParser
 
     public function getExtractContent()
     {
-        if (!$this->_extract instanceof ExtractContent) {
+        if (!$this->_extractContent instanceof ExtractContent) {
             $this->_extractContent = new HTML_ExtractContent();
-            $this->_extractContent->setOpt($this->_parserOptions);
+            $this->_extractContent->setOpt($this->_settings);
         }
 
         return $this->_extractContent;

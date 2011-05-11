@@ -6,7 +6,9 @@ use Diggin\Extractor\Document,
 
 interface Parser
 {
-    public function __construct(Registry $registry, $parserOptions = array());
+    public function __construct($options = array());
+
+    public function setRegistry(Registry $registry);
 
     /**
      * Parse Action
@@ -15,4 +17,5 @@ interface Parser
      * @return mixed
      */
     public function parse(Document $document);
+
 }

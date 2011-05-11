@@ -12,21 +12,23 @@ abstract class AbstractParser implements Parser
 {
     private $_registry;
 
-    // base configure
-    protected $_parserOptions = array();
+    // settings for each parser
+    protected $_settings = array();
     
-    public function __construct(Registry $registry, $parserOptions = array())
+    public function __construct($settings = array())
     {
-        $this->_registery  = $registry;
-
-        foreach ($parserOptions as $k => $v) {
-            $this->_parserOptions[$k] = $v;
+        foreach ($settings as $k => $v) {
+            $this->_settings[$k] = $v;
         }
+    }
+
+    public function setRegistry(Registry $registry)
+    {
+        $this->_registery = $registry;   
     }
 
     public function getRegistry()
     {
         return $this->_registery;
     }
-
 }
