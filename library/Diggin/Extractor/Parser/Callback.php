@@ -7,7 +7,6 @@ use Diggin\Extractor\Parser\AbstractParser,
 
 class Callback extends AbstractParser
 {
-    private $_extract;
     public static $callback;
 
     public function parse(Document $document)

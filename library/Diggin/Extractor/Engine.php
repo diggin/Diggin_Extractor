@@ -7,26 +7,6 @@ use Zend\Uri\Http as UriHttp,
 class Engine
 {
     protected $_parserSpecBroker = null;
-    
-    /**
-     * parsers & paraer-option set.
-     */
-    protected $_parserOptions = array('ldrfullfeed' => array(),
-                                      'extractcontent' => array(), 
-                                      'callback' => array());
-
-    public function __construct($parserOptions = array())
-    {
-        $this->setParserOptions($parserOptions);
-    }
-
-    // todo mutable check
-    public function setParserOptions($options)
-    {
-        foreach($options as $k => $v) {
-            $this->_parserOptions[$k] = $v;
-        }
-    }
 
     public function run($body, $metadatas = array())
     {
@@ -38,7 +18,7 @@ class Engine
     protected function _parse(Document $document)
     {        
         foreach ($this->getParserSpecBroker()->getClassLoader() as $plugin => $class) {
-            $parser = $this->getParserSpecBroker()->load($plugin, $this->_parserOptions[$plugin]);
+            $parser = $this->getParserSpecBroker()->load($plugin);
             $result = $parser->parse($document);
             if (($result instanceof Result) && $result->hasMatchedParser()) {
                 break;

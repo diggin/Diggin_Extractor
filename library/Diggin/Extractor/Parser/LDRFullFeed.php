@@ -14,8 +14,8 @@ class LDRFullFeed extends AbstractParser
 
     public function parse(Document $document)
     {
-        if (Extractor::hasRegistry()) {
-            if (!$fullfeed = Extractor::getRegistry()->getCache()->load('ldrfullfeed')){
+        if ($cache = $this->getRegistry()->getCache()) {
+            if (!$fullfeed = $cache()->load('ldrfullfeed')){
                 return false;
             }
         }
@@ -47,12 +47,6 @@ class LDRFullFeed extends AbstractParser
         }
         
     }
-
-    /**
-    public static function parseStatic($url, $body, $siteinfo)
-    {
-    
-    }*/
 
     public function getScraper()
     {

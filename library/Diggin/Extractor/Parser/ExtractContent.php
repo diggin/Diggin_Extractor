@@ -3,21 +3,26 @@ namespace Diggin\Extractor\Parser;
 
 use Diggin\Extractor\Parser\AbstractParser,
     Diggin\Extractor\Document,
-    Diggin\Extractor\Result;
+    Diggin\Extractor\Result
+    HTML_ExtractContent;
 
 class ExtractContent extends AbstractParser
 {
-    private $_extract;
+    private $_extractContent;
 
-    public function __construct($options = array())
+    public function getExtractContent()
     {
-        $this->_extract = new \HTML_ExtractContent();
-        $this->_extract->setOpt($options);
+        if (!$this->_extract instanceof ExtractContent) {
+            $this->_extractContent = new HTML_ExtractContent();
+            $this->_extractContent->setOpt($this->_parserOptions);
+        }
+
+        return $this->_extractContent;
     }
 
     public function parse(Document $document)
     {
-        $ret = $this->_extract->analyze($document->getBody());
+        $ret = $this->getExtractContent()->analyze($document->getBody());
         if (isset($ret[0]) && !empty($ret[0])) {
             $result = new Result;
             $result->setMatchedParser(__CLASS__);

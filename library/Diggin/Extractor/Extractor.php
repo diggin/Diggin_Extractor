@@ -17,7 +17,15 @@ class Extractor
 
     public static function factory(array $parserOptions = array())
     {
-        return new static($parserOptions);
+        $static = new static();
+        $parserSpecBroker = $static->getEngine()->getParserSpecBroker();
+
+        // cause bug
+        foreach ($parserOptions as $name => $spec) {
+            $parserSpecBroker->registerSpec($name, array(static::getRegistry(), $spec));
+        }
+
+        return $static;
     }
 
     public static function setRegistry(Registry $registry)
@@ -39,9 +47,9 @@ class Extractor
         return static::$_registry;
     }
 
-    private function __construct($parserOptions)
+    private function __construct()
     {
-        $this->_engine = new Engine($parserOptions);
+        $this->_engine = new Engine();
     }
 
     public function setHttpClient()
@@ -56,11 +64,6 @@ class Extractor
         }
 
         return $this->_httpClient;
-    }
-    
-    public function setResponseFilter()
-    {
-         return ;
     }
 
     public function filterResponse(HttpResponse $response, $url)
